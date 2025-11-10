@@ -14,6 +14,19 @@ import authRoute from "./features/auth/authRoute.js";
 app.use(morgan('dev'));
 
 app.use(cookieParser());
+// Temporary request logger to help debug cookie behavior in production.
+// Logs origin and cookies for each incoming request. Remove after debugging.
+app.use((req, res, next) => {
+    try {
+        console.log('== incoming request ==');
+        console.log('method:', req.method, 'path:', req.path);
+        console.log('origin:', req.headers.origin);
+        console.log('cookies:', req.cookies);
+    } catch (err) {
+        console.log('logger error', err);
+    }
+    next();
+});
 app.use(cors(corsOption));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
