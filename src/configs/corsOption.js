@@ -2,6 +2,7 @@ import allowedOrigins from "./allowedOrigins.js";
 
 const corsOption = {
     origin: (origin, callback) => {
+        console.log("CORS origin received:", origin);
         if (allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
