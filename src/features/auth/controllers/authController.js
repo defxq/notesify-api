@@ -33,9 +33,10 @@ const login = asyncHandler(async (req, res) => {
         'refreshToken',
         refreshToken,
         {
-            httpOnly: true, // accessbility only on webserver
-            secure: true, // https
-            sameSite: "None", // cross-site cookie
+            httpOnly: true, 
+            secure: true, 
+            sameSite: "None",
+            domain: "https://notesify-95wy.onrender.com",
             maxAge: 1000 * 60 * 60 * 24 * 7
         }
     );
@@ -78,6 +79,7 @@ const logout = asyncHandler(async (req, res) => {
     res.clearCookie('refreshToken', {
         httpOnly: true,
         secure: true,
+        domain: "https://notesify-95wy.onrender.com",
         sameSite: "None",
     });
     res.json({ message: "Cookie  cleared" });
