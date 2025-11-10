@@ -1,5 +1,10 @@
 import express from "express";
 const app = express();
+// When running behind a proxy (Render, Cloudflare, etc.) Express should
+// trust the proxy so middlewares like express-rate-limit can read
+// X-Forwarded-* headers correctly. Without this, express-rate-limit may
+// throw the `ERR_ERL_UNEXPECTED_X_FORWARDED_FOR` error seen in production.
+app.set('trust proxy', 1);
 import "dotenv/config";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
